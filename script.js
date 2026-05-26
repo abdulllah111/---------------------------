@@ -40,7 +40,7 @@ function drawCertificate() {
         ctx.textBaseline = 'middle';
 
         const x = canvas.width / 2;
-        const y = canvas.height * 0.48;
+        const y = canvas.height * 0.38;
 
         ctx.fillText(name, x, y);
 
