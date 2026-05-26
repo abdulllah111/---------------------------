@@ -1,6 +1,8 @@
 const canvas = document.getElementById('certificateCanvas');
 const ctx = canvas.getContext('2d');
 const nameInput = document.getElementById('nameInput');
+const dateInput = document.getElementById('dateInput');
+const numberInput = document.getElementById('numberInput');
 const downloadBtn = document.getElementById('downloadBtn');
 
 const img = new Image();
@@ -28,6 +30,7 @@ function drawCertificate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(img, 0, 0);
 
+    // 1. Рисуем ФИО
     const name = nameInput.value.trim();
     if (name) {
         const fontSize = Math.floor(canvas.width * 0.04); 
@@ -37,7 +40,7 @@ function drawCertificate() {
         ctx.textBaseline = 'middle';
 
         const x = canvas.width / 2;
-        const y = canvas.height * 0.38;
+        const y = canvas.height * 0.48;
 
         ctx.fillText(name, x, y);
 
@@ -51,9 +54,41 @@ function drawCertificate() {
         ctx.lineWidth = 2;
         ctx.stroke();
     }
+
+    // 2. Рисуем Дату
+    const dateText = dateInput.value.trim();
+    if (dateText) {
+        const dateFontSize = Math.floor(canvas.width * 0.013);
+        ctx.font = `400 ${dateFontSize}px 'Montserrat', sans-serif`;
+        ctx.fillStyle = '#4a3728';
+        ctx.textAlign = 'left';
+
+        // РЕГУЛИРУЙТЕ ТУТ:
+        const xDate = canvas.width * 0.50; 
+        const yDate = canvas.height * 0.82;
+
+        ctx.fillText(dateText, xDate, yDate);
+    }
+
+    // 3. Рисуем Номер
+    const numberText = numberInput.value.trim();
+    if (numberText) {
+        const numFontSize = Math.floor(canvas.width * 0.013);
+        ctx.font = `400 ${numFontSize}px 'Montserrat', sans-serif`;
+        ctx.fillStyle = '#4a3728';
+        ctx.textAlign = 'left';
+
+        // РЕГУЛИРУЙТЕ ТУТ:
+        const xNum = canvas.width * 0.645; 
+        const yNum = canvas.height * 0.82;
+
+        ctx.fillText(numberText, xNum, yNum);
+    }
 }
 
 nameInput.addEventListener('input', drawCertificate);
+dateInput.addEventListener('input', drawCertificate);
+numberInput.addEventListener('input', drawCertificate);
 
 downloadBtn.addEventListener('click', () => {
     try {
